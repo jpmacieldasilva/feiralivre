@@ -1,0 +1,24 @@
+// This is the project stylesheet
+// Base
+@import 'css/reset';
+@import 'css/animations';
+@import 'css/grid';
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+//Fonts 
+@import url('https://fonts.googleapis.com/css2?family=Sansita');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+// Colors
+$background-color: rgba(232, 220, 211, 1);
+$primary-color: rgba(24, 72, 56, 1);
+$secondary-color:#ED7817;
+
+// Greyscale
+$primary-grey: #363636;
+$primary-white: #fafafa;
+

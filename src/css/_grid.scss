@@ -1,0 +1,70 @@
+﻿$break-small: 600px;
+$break-medium: 800px;
+$break-large: 1200px;
+
+// large // 
+$large-gutter: 24px;
+$large-columns: 12;
+$large-max: $break-large;
+
+[class*="lg-"] {
+  margin: 0 auto;
+  padding: 0 $large-gutter;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  max-width: $break-large;
+}
+
+;
+
+@for $i from 1 through $large-columns {
+  .lg-#{$i} {
+    width: 100% / $large-columns * $i
+  }
+}
+
+// medium // 
+$medium-gutter: 16px;
+$medium-columns: 8;
+$medium-max: $break-medium;
+
+[class*="md-"] {
+  margin: 0 auto;
+  padding: 0 $medium-gutter;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: $break-medium) {
+  @for $i from 1 through $medium-columns {
+    .md-#{$i} {
+      width: 100% / $medium-columns * $i
+    }
+  }
+}
+
+// small // 
+$small-gutter: 16px;
+$small-columns: 4;
+$small-max: $break-small;
+
+[class*="sm-"] {
+  margin: 0 auto;
+  padding: 0 $small-gutter;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+}
+
+@media only screen and (max-width: $break-small) {
+
+@for $i from 1 through $small-columns {
+  .sm-#{$i} {
+    width: 100% / $small-columns * $i
+  }
+}
+}
+
+.container {
+  width: 100%;
+}

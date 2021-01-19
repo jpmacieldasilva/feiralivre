@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import navBar from '@/components/navBar.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-
+    path: '/',
+    name: 'navBar',
+    component: navBar,
   },
 ];
 
