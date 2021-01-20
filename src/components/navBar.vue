@@ -125,9 +125,10 @@ export default {
   }
 
   & label{
-    font-family: $primary-type;
+    font-family: $secondary-type;
     font-size: .875rem;
     text-align: left;
+    font-weight: bold;
     width: 100%;
     color: $primary-color;
   }
@@ -153,6 +154,7 @@ export default {
   & label{
     font-family: $secondary-type;
     font-size: .875rem;
+    font-weight: normal;
   }
 }
 

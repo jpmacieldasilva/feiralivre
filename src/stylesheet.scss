@@ -11,7 +11,7 @@ body{
 
 //Fonts 
 @import url('https://fonts.googleapis.com/css2?family=Sansita');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 //Typo 
 $primary-type: 'Sansita', serif;
@@ -25,4 +25,9 @@ $secondary-color:#ED7817;
 // Greyscale
 $primary-grey: #363636;
 $primary-white: #fafafa;
+
+.ico {
+    max-width: 25px;
+    max-height: 25px;
+}
 
