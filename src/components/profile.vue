@@ -1,7 +1,8 @@
 <template>
   <div class="lg-9 profile">
     <div class="profile-back">
-        <a href=""><img class="ico" src="../assets/back.svg" alt=""> voltar para lista </a>
+        <a href="javascript:history.go(-1)">
+            <img class="ico" src="../assets/back.svg" alt=""> voltar para lista </a>
     </div>
     <div class="profile-content">
         <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="profile-image">
@@ -56,7 +57,7 @@
 
 <script>
 export default {
-
+  name: 'profile',
 };
 </script>
 

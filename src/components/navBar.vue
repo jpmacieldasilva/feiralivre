@@ -9,41 +9,36 @@
       <h3>ENCONTRE UM NEGÓCIO</h3>
      <div class="navbar-check">
        <div class="navbar-option">
-         <input type="checkbox" id="mulheres" name="mulheres" value="mulheres">
+         <input type="checkbox" id="mulheres" name="mulheres" value="mulheres" v-model="grupoBusca">
          <label for="mulheres"> Mulheres</label>
        </div>
        <div class="navbar-option">
-        <input type="checkbox" id="negros" name="negros" value="negros">
+        <input type="checkbox" id="negros" name="negros" value="negros" v-model="grupoBusca">
         <label for="negros"> Pessoas negras</label>
        </div>
        <div class="navbar-option">
-        <input type="checkbox" id="indigenas" name="indigenas" value="indigenas">
+        <input type="checkbox" id="indigenas" name="indigenas"
+        value="indigenas" v-model="grupoBusca">
         <label for="indigenas">Indígenas</label>
        </div>
        <div class="navbar-option">
-         <input type="checkbox" id="lgbt" name="lgbt" value="lgbt">
+         <input type="checkbox" id="lgbt" name="lgbt" value="lgbt" v-model="grupoBusca">
          <label for="lgbt"> LGBTQI+</label>
        </div>
      </div>
-      <label for="search" >Buscar por um termo</label>
-      <input type="search" placeholder="Digite aqui">
+      <label for="search">Buscar por um termo</label>
+      <input type="search" placeholder="Digite aqui" v-model="termoBusca">
       <label for="categoria">Categoria</label>
-      <select name="categoria" id="categoria">
-       <option disabled selected>Escolha uma categoria</option>
-       <option value="volvo">Volvo</option>
-       <option value="saab">Saab</option>
-       <option value="mercedes">Mercedes</option>
-       <option value="audi">Audi</option>
+      <select name="categoria" id="categoria" v-model="categoriaBusca">
+        <option disabled selected>Escolha uma categoria</option>
+        <option :value="'teste'" >Volvo</option>
       </select>
       <label for="cidade">Cidade</label>
-      <select name="cidade" id="cidade">
-       <option disabled selected>Escolha uma cidade</option>
-       <option value="volvo">Volvo</option>
-       <option value="saab">Saab</option>
-       <option value="mercedes">Mercedes</option>
-       <option value="audi">Audi</option>
+      <select name="cidade" id="cidade" v-model="cidadeBusca">
+        <option disabled selected>Escolha uma cidade</option>
+        <option :value="'teste'">Volvo</option>
       </select>
-      <button class="button-primary">Buscar</button>
+      <a href="" class="button-primary" @click="enviarBusca">Buscar</a>
     </div>
     <div class="navbar-links">
       <a href=""> Sobre</a>
@@ -54,7 +49,46 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      termoBusca: '',
+      cidadeBusca: '',
+      categoriaBusca: '',
+      grupoBusca: [],
+    };
+  },
+  mounted() {
+    if (localStorage.termoBusca) this.termoBusca = localStorage.termoBusca;
+    if (localStorage.categoriaBusca) this.categoriaBusca = localStorage.categoriaBusca;
+    if (localStorage.cidadeBusca) this.cidadeBusca = localStorage.cidadeBusca;
+    if (localStorage.grupoBusca) this.grupoBusca = localStorage.grupoBusca;
+  },
+  watch: {
+    termoBusca(newTermoBusca) {
+      localStorage.termoBusca = newTermoBusca;
+    },
+    categoriaBusca(newCategoria) {
+      localStorage.categoriaBusca = newCategoria;
+    },
+    cidadeBusca(newCidade) {
+      localStorage.cidadeBusca = newCidade;
+    },
+    grupoBusca(newGrupo) {
+      localStorage.grupoBusca = newGrupo;
+    },
+  },
+  methods: {
+    enviarBusca() {
+    // eslint-disable-next-line
+      console.log('busca ta indo');
+      this.$emit('enviandoBusca', {
+        termo: this.termoBusca,
+        cidade: this.cidadeBusca,
+        categoria: this.categoriaBusca,
+        grupo: this.grupoBusca,
+      });
+    },
+  },
 };
 </script>
 
