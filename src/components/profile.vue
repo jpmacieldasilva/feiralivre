@@ -79,12 +79,10 @@ export default {
     color: $primary-color;
     margin-bottom: 2rem;
 }
-
 .profile-content{
     display: flex;
     width: 100%;
     justify-content: space-between;
-
     & .profile-image {
         width: 200px;
         height: 200px;
@@ -92,7 +90,6 @@ export default {
         object-fit: cover;
         margin-right: 2rem;
     }
-
     & .profile-info{
         display: flex;
         width: 100%;
@@ -100,16 +97,13 @@ export default {
         justify-content: space-evenly;
     }
 }
-
 .profile-head{
     display: flex;
     justify-content: space-between;
-
     & .head-infos{
         display: flex;
         flex-grow: 2;
         align-items: center;
-
      & h4{
         font-family: $secondary-type;
         color: $primary-color;
@@ -121,7 +115,6 @@ export default {
      & .profile-flags {
         width: 35%;
         display: flex;
-
         & img {
             width: 35px;
             height: auto;
@@ -146,40 +139,33 @@ export default {
         align-content: center;
         flex-direction: column;
 }
-
 .profile-details {
     display: flex;
             width: 100%;
             font-size: .875rem;
-
             & .detail-info{
                 display: flex;
                 align-items: center;
             }
-
             & p{
                 margin-right: .625rem;
                 }
-
            & img {
                width: auto;
                height: 16px;
                margin-right: .313rem;
            }
 }
-
 .profile-text{
     color: $primary-grey;
     font-size: 1rem;
     line-height: 1.75rem;
 }
-
 hr{
     border: 1px solid rgba(24, 72, 56, 0.3);
     width: 100%;
     margin: 30px 0 ;
 }
-
 .profile-album{
     width: 100%;
     height: 940px;
@@ -188,7 +174,6 @@ hr{
     justify-content: space-evenly;
     overflow: scroll;
     height: 100%;
-
     & img{
         width: 30%;
         height: 300px;
