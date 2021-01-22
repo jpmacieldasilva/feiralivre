@@ -1,11 +1,10 @@
 <template>
-  <div class="list-view" @enviandoBusca="recebendoFiltro">
-    <router-link :to="{name: 'profile'}">
+  <div class="list-view">
       <div class="card-bussiness">
           <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="card-image">
           <div class="card-info">
               <div class="card-primary">
-                <h4>{{termoFiltro}}</h4>
+                <h4>Pitanga Cozinha</h4>
                 <div class="card-flags">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/800px-Flag_of_Brazil.svg.png" alt="" class="flag-info">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/800px-Flag_of_Brazil.svg.png" alt="" class="flag-info">
@@ -25,63 +24,13 @@
               </div>
           </div>
       </div>
-    </router-link>
   </div>
 
 </template>
 
 <script>
 export default {
-  name: 'Lista',
-  created() {
-    this.getUsers();
-  },
-  data() {
-    return {
-      users: [],
-      termoFiltro: '',
-      cidadeFiltro: '',
-      categoriaFiltro: '',
-      grupoFiltro: [],
-    };
-  },
-  components: {
-  },
-  filteredList() {
-    let filtered = this.users;
-    if (this.searchString) {
-      filtered = this.users.filter(
-        (u) => u.name.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1
-        || u.email.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1,
-      );
-    }
-    if (this.selectNumber) {
-      filtered = filtered.filter(
-        (u) => u.email.toLowerCase().indexOf(this.selectNumber.toLowerCase()) > -1,
-      );
-    }
-    return filtered;
-  },
-  methods: {
-    getUsers() {
-      // const url = 'https://jsonplaceholder.typicode.com/users';
-      // axios.get(url).then((response) => {
-      // this.users = response.data;
-      // });
-    },
-    recebendoFiltro($event) {
-      this.termoFiltro = $event.termo;
-      this.cidadeFiltro = $event.cidade;
-      this.categoriaFiltro = $event.categoria;
-      this.grupoFiltro = $event.grupo;
-    },
-  },
-  mounted() {
-    if (localStorage.termoBusca) this.termoFiltro = localStorage.termoBusca;
-    if (localStorage.cidadeBusca) this.cidadeFiltro = localStorage.cidadeBusca;
-    if (localStorage.categoriaBusca) this.categoriaFiltro = localStorage.categoriaBusca;
-    if (localStorage.grupoBusca) this.grupoFiltro = localStorage.grupoBusca;
-  },
+
 };
 
 </script>
