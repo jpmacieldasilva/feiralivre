@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
       <nav-bar></nav-bar>
     <router-view/>
@@ -17,5 +18,7 @@ export default {
   #app{
     display: flex;
     height: 100vh;
+    overflow: hidden;
+    background-color: $background-color;
   }
 </style>

@@ -5,59 +5,83 @@
             <img class="ico" src="../assets/back.svg" alt=""> voltar para lista </a>
     </div>
     <div class="profile-content">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="profile-image">
         <div class="profile-info">
             <div class="profile-head">
                 <div class="head-infos">
-                    <h4>Pitanga Cozinha</h4>
+                    <h4>{{usuario.name}}</h4>
                     <div class="profile-flags">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/800px-Flag_of_Brazil.svg.png" alt="" class="flag-info">
                     </div>
                 </div>
-                <a href="" class="profile-contact">entrar em contato</a>
+                <a :href="usuario.phone" class="profile-contact">entrar em contato</a>
             </div>
             <div class="profile-details">
                 <div class="detail-info">
                     <img src="../assets/briefcase.svg" >
-                    <p>Alimentação</p>
+                    <p>{{usuario.category}}</p>
                 </div>
                 <div class="detail-info">
                     <img src="../assets/pin.svg" >
-                    <p>Taguatinga</p>
+                    <p>{{usuario.city}}</p>
                 </div>
-                <div class="detail-info">
+                <div v-show="usuario.site" class="detail-info">
                     <img src="../assets/briefcase.svg" >
-                    <p>Alimentação</p>
+                    <p>{{usuario.site}}</p>
                 </div>
             </div>
             <div class="profile-text">
-                <p>Quisque accumsan arcu diam, ut placerat elit malesuada non. Donec ex nisl,
-                vestibulum ut urna eget, rhoncus ullamcorper leo. Quisque fringilla,
-                 diam a efficitur porttitor, tortor nunc tincidunt augue, et.</p>
+                <p>{{usuario.about}}</p>
             </div>
         </div>
     </div>
 
     <hr>
 
-    <div class="profile-album">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+    <insta-vue v-if="!usuario.photo1" class="profile-album" :tag='usuario.instagram'
+    :quantity="9" :cols="3"> </insta-vue>
 
+    <div v-if="usuario.photo1" class="profile-album">
+        <img :src='usuario.photo1.replace("open","uc")' alt="">
+        <img :src='usuario.photo2.replace("open","uc")' alt="">
+        <img :src='usuario.photo3.replace("open","uc")' alt="">
+        <img :src='usuario.photo4.replace("open","uc")' alt="">
+        <img :src='usuario.photo5.replace("open","uc")' alt="">
+        <img :src='usuario.photo6.replace("open","uc")' alt="">
+        <img :src='usuario.photo7.replace("open","uc")' alt="">
+        <img :src='usuario.photo8.replace("open","uc")' alt="">
+        <img :src='usuario.photo9.replace("open","uc")' alt="">
     </div>
   </div>
 </template>
 
 <script>
+import InstaVue from 'insta-vue';
+import axios from 'axios';
+
 export default {
   name: 'profile',
+  components: {
+    InstaVue,
+  },
+  created() {
+    this.getUsers();
+  },
+  data() {
+    return {
+      usuario: {},
+      /* eslint-disable-next-line */
+      dataToken: 'IGQVJYMVdta2lySkU3MF9xMERMZAzVDcTZAmT1dYYlJqOFd0Ym53U2dUbWVES2tDeFZA5el90VWFnN3IwMExxUnBRVzBGQXNkdFhIVWhNVl96ZAW04aXQ1NmhoQUt6NDFOcDY5R0t1NjRnSV9fZA1l6dWUwTgZDZD',
+    };
+  },
+  methods: {
+    getUsers() {
+      const url = `https://feiralivre-a686b-default-rtdb.firebaseio.com/users/${this.$route.params.name}.json`;
+      console.log(url);
+      axios.get(url).then((response) => {
+        this.usuario = response.data;
+      });
+    },
+  },
 };
 </script>
 
@@ -65,8 +89,8 @@ export default {
 @import '../stylesheet.scss';
 .profile{
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    height: 110vh;
+    max-height: 110vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,10 +103,12 @@ export default {
     color: $primary-color;
     margin-bottom: 2rem;
 }
+
 .profile-content{
     display: flex;
     width: 100%;
     justify-content: space-between;
+
     & .profile-image {
         width: 200px;
         height: 200px;
@@ -90,6 +116,7 @@ export default {
         object-fit: cover;
         margin-right: 2rem;
     }
+
     & .profile-info{
         display: flex;
         width: 100%;
@@ -97,13 +124,16 @@ export default {
         justify-content: space-evenly;
     }
 }
+
 .profile-head{
     display: flex;
     justify-content: space-between;
+
     & .head-infos{
         display: flex;
         flex-grow: 2;
         align-items: center;
+
      & h4{
         font-family: $secondary-type;
         color: $primary-color;
@@ -115,6 +145,7 @@ export default {
      & .profile-flags {
         width: 35%;
         display: flex;
+
         & img {
             width: 35px;
             height: auto;
@@ -139,34 +170,41 @@ export default {
         align-content: center;
         flex-direction: column;
 }
+
 .profile-details {
     display: flex;
             width: 100%;
             font-size: .875rem;
+
             & .detail-info{
                 display: flex;
                 align-items: center;
             }
+
             & p{
                 margin-right: .625rem;
                 }
+
            & img {
                width: auto;
                height: 16px;
                margin-right: .313rem;
            }
 }
+
 .profile-text{
     color: $primary-grey;
     font-size: 1rem;
     line-height: 1.75rem;
 }
+
 hr{
     border: 1px solid rgba(24, 72, 56, 0.3);
     width: 100%;
     margin: 30px 0 ;
 }
-.profile-album{
+
+.profile-album {
     width: 100%;
     height: 940px;
     display: flex;
@@ -174,6 +212,7 @@ hr{
     justify-content: space-evenly;
     overflow: scroll;
     height: 100%;
+
     & img{
         width: 30%;
         height: 300px;

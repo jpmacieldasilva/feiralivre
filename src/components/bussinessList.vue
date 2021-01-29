@@ -1,11 +1,14 @@
 <template>
   <div class="list-view" @enviandoBusca="recebendoFiltro">
-    <router-link :to="{name: 'profile'}">
-      <div class="card-bussiness">
+    <router-link class="card-bussiness"
+    :to="{name: 'profile',
+      params: {name: user.name.toLowerCase().replace(/[\s-]/g,'-'),
+       id: user.id}}" v-for="user in users" :key="user.id">
+      <div class="">
           <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="card-image">
           <div class="card-info">
               <div class="card-primary">
-                <h4>{{termoFiltro}}</h4>
+                <h4>{{user.name}}</h4>
                 <div class="card-flags">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/800px-Flag_of_Brazil.svg.png" alt="" class="flag-info">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/800px-Flag_of_Brazil.svg.png" alt="" class="flag-info">
@@ -16,11 +19,11 @@
               <div class="card-detail">
                   <div class="detail-info">
                        <img src="../assets/briefcase.svg" >
-                      <p>Alimentação</p>
+                      <p>{{user.index}}</p>
                   </div>
                   <div class="detail-info">
                       <img src="../assets/pin.svg" >
-                      <p>Taguatinga</p>
+                      <p>{{user.city}}</p>
                   </div>
               </div>
           </div>
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Lista',
   created() {
@@ -39,6 +44,7 @@ export default {
   data() {
     return {
       users: [],
+      user: '',
       termoFiltro: '',
       cidadeFiltro: '',
       categoriaFiltro: '',
@@ -64,10 +70,12 @@ export default {
   },
   methods: {
     getUsers() {
+      const url = 'https://feiralivre-a686b-default-rtdb.firebaseio.com/users.json';
       // const url = 'https://jsonplaceholder.typicode.com/users';
-      // axios.get(url).then((response) => {
-      // this.users = response.data;
-      // });
+      axios.get(url).then((response) => {
+        this.users = response.data;
+        console.log(response.data);
+      });
     },
     recebendoFiltro($event) {
       this.termoFiltro = $event.termo;
@@ -93,20 +101,18 @@ export default {
     width: 100%;
     background-color: $background-color;
     padding: 1.875rem;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    overflow:visible;
-    clear: both;
+    overflow: scroll;
 }
 
 .card-bussiness{
     background-color: $primary-white;
-    width: 33%;
+    width: 30%;
     min-width: 280px;
-    height: auto;
-    max-height: 320px;
-    margin-bottom: 5px;
+    max-height: 300px;
+    margin: 0.8rem;
 
     & img{
         width: 100%;
